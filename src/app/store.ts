@@ -8,7 +8,7 @@ import { usersApi } from '../services/users';
 
 
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: {
     counter: counterReducer,
     [cryptoApi.reducerPath]: cryptoApi.reducer,
