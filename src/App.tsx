@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Posts from './components/posts/Posts';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 // import { Link, Routes, Route } from "react-router-dom"
@@ -9,20 +10,6 @@ import React, { useEffect, useRef, useState } from 'react';
 // import TodoList from './components/TodoList';
 // import { useDispatch, useSelector } from 'react-redux';
 // import Test from './components/test/Test';
-import Footer from './components/Footer';
-import CRUD from './components/crud/CRUD';
-import Jsonplace from './components/jsonplace/Jsonplace';
-import { Route, Routes } from 'react-router-dom';
-import Posts from './components/posts/Posts';
-import Home from './components/posts/Home';
-import About from './components/posts/About';
-import Missing from './components/posts/Missing';
-import PostPage from './components/posts/PostPage';
-import NewPost from './components/posts/NewPost';
-
-import { useNavigate } from "react-router-dom"
-import { format } from 'date-fns';
-import Nav from './components/posts/Nav';
 
 export interface PostType {
   id: number,
@@ -32,70 +19,33 @@ export interface PostType {
 }
 
 function App() {
-  const navigate = useNavigate()
-  const [postTitle, setPostTitle] = useState<string>('')
-  const [postBody, setPostBody] = useState<string>('')
-  const [search, setSearch] = useState<string>('')
-  const [searchResults, setSearchResults] = useState<PostType[]>([])
-  const [posts, setPosts] = useState<PostType[]>([
-    {
-      id: 1,
-      title: "My First Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 1"
-    },
-    {
-      id: 2,
-      title: "My First Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 3"
-    },
-    {
-      id: 3,
-      title: "My First Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 3"
-    }
-  ])
-  useEffect(() => {
-    const filteredResults = posts.filter((post: any) => 
-    ((post.title).toLowerCase()).includes(search) || ((post.body).toLowerCase()).includes(search)
-    )
-    setSearchResults(filteredResults.reverse())
-  }, [posts, search])
 
-  const handleDelete = (id: any) => {
-    const postsList = posts.filter((post: any) => post.id !== id)
-    setPosts(postsList)
-    navigate(-1)
-  }
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
-    const newPost = {id, title: postTitle, datetime, body: postBody}
-    const allPosts = [...posts, newPost]
-    setPosts(allPosts)
-    setPostBody("")
-    setPostTitle('')
-    navigate(-1)
-  }
-
+    //   [
+    //   {
+    //     id: 1,
+    //     title: "My First Post",
+    //     datetime: "July 01, 2021 11:17:36 AM",
+    //     body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 1"
+    //   },
+    //   {
+    //     id: 2,
+    //     title: "My First Post",
+    //     datetime: "July 01, 2021 11:17:36 AM",
+    //     body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 3"
+    //   },
+    //   {
+    //     id: 3,
+    //     title: "My First Post",
+    //     datetime: "July 01, 2021 11:17:36 AM",
+    //     body: "Lorem ispsum dolor sit smet consectetur adipisicing elit. Quis 3"
+    //   }
+    // ]
+  // )
+ 
   return (
     <>
-    <Nav {...{search}} {...{setSearch}} />
-    <Routes>
-      <Route path='/' element={<Home posts={searchResults} />} />
-      <Route path='/post' element={<NewPost
-      {...{handleSubmit}} {...{postTitle}} {...{postBody}} {...{setPostBody}} {...{setPostTitle}} 
-      />} />
-      <Route path='/post/:id' element={<PostPage  {...{posts}} {...{handleDelete}} />} />
-      <Route path='/about' element={<About />} />
-      <Route path='*' element={<Missing />} />
-    </Routes> 
-
-    <Footer/>
-    {/* <div className="">
+    <Posts />
+      {/* <div className="">
       <hr style={{marginBottom: '20px'}} />
     <CRUD/>  
     </div>

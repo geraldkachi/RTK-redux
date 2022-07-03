@@ -13,7 +13,7 @@ interface PostType {
 const PostPage = ({ posts, handleDelete }: PostType) => {
   
   const { id } = useParams()
-  const post = posts.find((post: any) => (post.id).toString() === id)
+  const post: any = posts.find((post: any) => (post.id).toString() === id)
 
   return (
     <main>
@@ -23,7 +23,10 @@ const PostPage = ({ posts, handleDelete }: PostType) => {
             <h2>{post.title}</h2>
             <p>{post.datetime}</p>
             <p>{post.body}</p>
-            <button style={{background: 'red', color:'white'}} onClick={() => handleDelete()}>Delete Post</button>
+            <hr />
+            <Link to={`/edit/${id}`}>Edit Post</Link>
+            <hr />
+            <button style={{background: 'red', color:'white'}} onClick={() => handleDelete(post.id)}>Delete Post</button>
           </>
         }
         {
