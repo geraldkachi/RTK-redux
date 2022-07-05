@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Posts from './components/posts/Posts';
+import AppRoute from './ProtectedRoutes/AppRoute';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 // import { Link, Routes, Route } from "react-router-dom"
@@ -44,12 +46,9 @@ function App() {
  
   return (
     <>
-    <Posts />
-      {/* <div className="">
-      <hr style={{marginBottom: '20px'}} />
-    <CRUD/>  
-    </div>
-    <Jsonplace  /> */}
+      <Routes>
+        <Route path='/^' element={<AppRoute />} />
+      </Routes>
     </>
 
   );
@@ -57,6 +56,17 @@ function App() {
 
 export default App;
 
+// return (
+//   <>
+//   <Posts />
+//     {/* <div className="">
+//     <hr style={{marginBottom: '20px'}} />
+//   <CRUD/>  
+//   </div>
+//   <Jsonplace  /> */}
+//   </>
+
+// );
 
 
 
